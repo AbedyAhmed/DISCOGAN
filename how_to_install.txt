@@ -1,0 +1,79 @@
+HOW TO INSTALL & TRAIN
+======================
+
+1. Installer Python 3.8
+-----------------------
+- Télécharger Python 3.8 depuis : https://www.python.org/downloads/release/python-380/
+- Pendant l'installation, cocher l'option "Add Python to PATH".
+- Vérifier l'installation :
+    python --version
+    # Doit afficher : Python 3.8.x
+
+2. Créer un environnement virtuel (recommandé)
+----------------------------------------------
+    python -m venv venv
+    # Activer l'environnement :
+    - Windows : venv\Scripts\activate
+    - Linux/Mac : source venv/bin/activate
+
+3. Mettre à jour pip
+--------------------
+    pip install --upgrade pip
+
+4. Installer les dépendances
+----------------------------
+    pip install torch>=2.0.0 torchvision>=0.15.0
+    pip install numpy
+    pip install Pillow
+    pip install tqdm
+    pip install opencv-python
+    pip install matplotlib
+
+5. Vérifier l’installation
+--------------------------
+    python -c "import torch, torchvision, numpy, PIL, tqdm, cv2, matplotlib; print('All packages installed successfully!')"
+
+
+=========================
+DATASETS & TRAINING
+=========================
+
+CelebA
+------
+Télécharger le dataset :
+    python ./datasets/download.py celebA
+(Note : le lien CelebA officiel peut être indisponible actuellement.)
+
+Exemples d’entraînement :
+- Conversion de genre :
+    python ./discogan/image_translation.py --task_name='celebA' --style_A='Male'
+
+- Conversion couleur des cheveux :
+    python ./discogan/image_translation.py --task_name='celebA' --style_A='Blond_Hair' --style_B='Black_Hair' --constraint='Male'
+
+
+Handbags / Shoes
+----------------
+Télécharger les datasets :
+    python ./datasets/download.py edges2handbags
+    python ./datasets/download.py edges2shoes
+
+Exemples d’entraînement :
+- Edges2Handbags :
+    python ./discogan/image_translation.py --task_name='edges2handbags'
+
+- Edges2Shoes :
+    python ./discogan/image_translation.py --task_name='edges2shoes'
+
+- Handbags2Shoes :
+    python ./discogan/image_translation.py --task_name='Handbags2Shoes' --starting_rate=0.5
+
+
+Facescrub
+---------
+Télécharger le dataset :
+    python ./datasets/download.py facescrub
+
+Exemple d’entraînement (conversion de genre) :
+    python ./discogan/image_translation.py --task_name='facescrub'
+
